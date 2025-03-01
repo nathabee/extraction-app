@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ExtractionApp</string>
+    <string name="opencv_success">✅ OpenCV Loaded Successfully!</string>
+    <string name="opencv_failure">❌ OpenCV Initialization Failed!</string>
+    <string name="camera_permission_denied">❌ Camera permission denied</string>
+    <string name="checking_opencv">Checking OpenCV</string>
+</resources>
+

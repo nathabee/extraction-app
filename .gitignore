@@ -1,0 +1,27 @@
+# Ignore OpenCV libraries
+openCV/
+OpenCV-android-sdk/
+
+# Android/Gradle specific files
+*.iml
+.gradle/
+local.properties
+/.idea/
+/*.apk
+/.cxx/
+/captures/
+/outputs/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore build directories
+/build/
+/app/build/
+
+# Ignore Gradle wrapper binary
+gradle/wrapper/gradle-wrapper.jar
+
+# my own ignore repository
+to_ignore
