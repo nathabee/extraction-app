@@ -4,5 +4,28 @@
     <string name="opencv_failure">❌ OpenCV Initialization Failed!</string>
     <string name="camera_permission_denied">❌ Camera permission denied</string>
     <string name="checking_opencv">Checking OpenCV</string>
+    <string name="select_image">Select Image</string>
+    <string name="select_background">Select Background (Optional)</string>
+    <string name="select_image_size">Select Image Size:</string>
+    <string name="tolerance">Tolerance</string>
+    <string name="brightness">Brightness</string>
+    <string name="threshold1">Threshold 1</string>
+    <string name="threshold2">Threshold 2</string>
+    <string name="process_image">Process Image</string>
+    <string name="input_image_desc">Selected input image</string>
+    <string name="background_image_desc">Selected background image</string>
+    <string name="transparent_image_desc">Transparent Image</string>
+    <string name="output_image_desc">Processed output image</string>
+    <string name="desc_img_input">Input image placeholder</string>
+    <string name="desc_img_background">Background image placeholder</string>
+
+    <string-array name="image_sizes">
+        <item>Small (S)</item>
+        <item>Medium (M)</item>
+        <item>Large (L)</item>
+        <item>Extra Large (XL)</item>
+        <item>XXL</item>
+    </string-array>
+
 </resources>
 
