@@ -24,4 +24,4 @@ Thumbs.db
 gradle/wrapper/gradle-wrapper.jar
 
 # my own ignore repository
-to_ignore
+to_ignore/
