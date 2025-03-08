@@ -2,7 +2,7 @@
 
 ## 📌 Overview
 
-**The Extraction App** is an Android application designed for image processing using OpenCV. It allows users to:
+**ExtractionApp** is an Android application designed for image processing using OpenCV. It allows users to:
 
 - Select an input image from the gallery.
 - Optionally select a background image for reference.
@@ -10,19 +10,28 @@
 - Adjust image processing parameters (tolerance, brightness, edge detection thresholds, contour color).
 - Process the image using OpenCV and display the result.
 
-ExtractionKotlinApp is the offiziel extraction App, it uses Kotlin and openCV Maven repository. This App is descriped in this document.
+This app replicates the functionality of a Python script for image manipulation, now implemented in Java for Android.
 
-The ExtractionApp is a variant using Opencv SDK local and JAVA, to get more information about see #/documentation/  
 ---
 
 ## 📂 Project Structure
 
 ```
-ExtractionKotlinApp/ : android code of the App
-ExtractionApp/  : alternative in Java (obsolete)
-Documentation/ : presentation
+ExtractionApp/
+│-- app/                    # Main Android App Module
+│   │-- src/main/java/       # Java Code
+│   │-- src/main/res/        # UI Layouts and Resources
+│   │-- AndroidManifest.xml  # App Configuration
+│
+│-- openCV/                 # OpenCV Module (Imported SDK)
+│   │-- sdk/                # OpenCV SDK for Android
+│   │-- java/               # OpenCV Java Bindings
+│
+│-- gradle/                 # Build Configuration
+│-- README.md               # This Documentation
 ```
-
+ 
+ 
 ---
 
 ## 🛠️ Installation & Setup
@@ -120,59 +129,4 @@ cd ExtractionApp
 
 ---
 
-## ⚙️ Technologies Used
-
-- **Android Studio** - Main development environment.
-- **Java** - Core programming language.
-- **OpenCV** - Image processing library.
-- **Gradle** - Build automation tool.
-
----
-
-## 🛠 Troubleshooting
-
-### **1️⃣ OpenCV Not Found**
-Ensure OpenCV is properly linked by verifying `app/build.gradle` contains:
-
-```gradle
-dependencies {
-    implementation project(':openCV')
-}
-```
-
-### **2️⃣ Gradle Build Issues**
-- Try cleaning the project: `Build` → `Clean Project`
-- Ensure **NDK** is installed correctly.
-- Check Gradle version compatibility.
-
-### **3️⃣ App Crashes on Start**
-- Check Logcat for errors.
-- Verify permissions for Camera & Storage in `AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.CAMERA"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-```
-
----
-
-## 📌 Future Improvements
-
-🔹 Real-time Camera Processing
-🔹 Customizable Filters
-🔹 Enhanced UI/UX
-
----
-
-## 📝 License
-
-This project is open-source under the **MIT License**.
-
----
-
-## 👥 Contributors
-
-Nathabee & ChatGPT - Developer
-
-_Open to new contributors! Fork and submit PRs. 🚀_
-
+ 
