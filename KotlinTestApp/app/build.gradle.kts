@@ -66,4 +66,5 @@ dependencies {
     implementation(libs.datastore.preferences)
     // Kotlin Coroutines (for DataStore)
     implementation(libs.coroutines.android)
+    implementation(libs.opencv)
 }

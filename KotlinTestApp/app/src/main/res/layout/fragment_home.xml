@@ -4,10 +4,29 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-
     <TextView
+        android:id="@+id/textHomeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to KotlinTestApp Home!"
-        android:textSize="18sp"/>
+        android:text="Welcome to KotlinTestApp!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/textHomeDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This app allows you to process images, change settings, and view a gallery using Jetpack and OpenCV."
+        android:padding="16dp"/>
+
+    <TextView
+        android:id="@+id/textHomeInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🔹 Processing: Select and process images.\n🔹 Settings: Customize app preferences.\n🔹 Gallery: View saved images.\n🔹 About: Learn more about this app."
+        android:padding="16dp"/>
+
+
 </LinearLayout>
