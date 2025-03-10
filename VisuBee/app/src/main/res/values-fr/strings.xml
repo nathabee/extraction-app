@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">VisuBee</string>
+    <string name="navigation_drawer_open">Ouvrir le menu de navigation</string>
+    <string name="navigation_drawer_close">Fermer le menu de navigation</string>
+    <string name="about_version">Version : %s</string>
+    <string name="save_processed_image">Enregistrer l\'image traitée</string>
+    <string name="process_image">Traiter l\'image</string>
+    <string name="threshold_2">Seuil 2</string>
+    <string name="threshold_1">Seuil 1</string>
+    <string name="brightness">Luminosité</string>
+    <string name="tolerance">Tolérance</string>
+    <string name="image_size">Taille de l\'image</string>
+    <string name="select_background">Sélectionner un arrière-plan</string>
+    <string name="select_image">Sélectionner une image</string>
+</resources>

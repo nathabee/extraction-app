@@ -1,178 +1,117 @@
-# ExtractionApp - Android Image Processing with OpenCV
+# **VisuBee - Android Image Processing with OpenCV**
 
-## 📌 Overview
+## **📖 Overview**
 
-**The Extraction App** is an Android application designed for image processing using OpenCV. It allows users to:
+**VisuBee** is an Android application for **image processing** using OpenCV. It allows users to:
 
-- Select an input image from the gallery.
-- Optionally select a background image for reference.
-- Choose an image size (S, M, L, etc.).
-- Adjust image processing parameters (tolerance, brightness, edge detection thresholds, contour color).
-- Process the image using OpenCV and display the result.
+✅ Select an input image from the gallery.  
+✅ Optionally select a background image for reference.  
+✅ Choose an image size (S, M, L, etc.).  
+✅ Adjust processing parameters (**tolerance, brightness, edge detection, contour color**).  
+✅ Process the image using OpenCV and display results.  
 
-ExtractionKotlinApp is the offiziel extraction App, it uses Kotlin and openCV Maven repository. This App is descriped in this document.
+VisuBee is built with **Kotlin** and uses the **OpenCV Maven repository**.
+ 
+📚 **Documentation:** [Documentation](documentation/) for more details.  
 
-The ExtractionApp is a variant using Opencv SDK local and JAVA, to get more information about see #/documentation/  
----
+📖 **User Manual:** [User Manual](documentation/UserManual.md)
+🛠 **Test:** [Test](documentation/Test.md)
+📑 **Specification:** [Specification](documentation/specification.md)
+📌 **Introduction to MVVM Architecture:** [Jetpack Architecture](documentation/Jetpack-Architecture.md)
 
-## 📂 Project Structure
-
-```
-ExtractionKotlinApp/ : android code of the App
-ExtractionApp/  : alternative in Java (obsolete)
-Documentation/ : presentation
-```
 
 ---
 
-## 🛠️ Installation & Setup
+## **📂 Project Structure**
+``` 
+extraction-app/       # Root repository for multiple projects
+│── VisuBee/          # Android application (VisuBee)
+│── Backend/          # (Future) Backend services
+│── documentation/    # Shared documentation across projects
 
-### 1️⃣ Prerequisites
+```
 
+---
+
+## **🛠️ Installation & Setup**
+
+### **1️⃣ Prerequisites**
 Ensure you have the following installed:
 
 - **Android Studio** (Latest version)
-- **Android SDK & NDK**
-- **OpenCV SDK for Android**
+- **Android SDK & NDK** (Ensure all dependencies are installed)
+- **OpenCV (via Maven repository)**
 
-### 2️⃣ Clone the Repository
-
+### **2️⃣ Clone the Repository**
 ```bash
-git clone https://github.com/yourusername/ExtractionApp.git
-cd ExtractionApp
-```
-
-### 3️⃣ Download & Extract OpenCV SDK
-
-1. **Download the latest OpenCV Android SDK** from [the OpenCV website](https://opencv.org/releases/).
-2. Extract it into the **root of your project**:
-   ```bash
-   mkdir -p OpenCV-android-sdk/
-   unzip opencv-*.zip -d OpenCV-android-sdk/
-   ```
-3. Move the SDK contents into the project’s OpenCV module:
-   ```bash
-   mv OpenCV-android-sdk/sdk ExtractionApp/openCV/
-   ```
-
-### 4️⃣ Import OpenCV as a Module
-
-1. **Open Android Studio**.
-2. Navigate to `File` → `New` → `Import Module`.
-3. Select `ExtractionApp/openCV/` as the module to import.
-4. Rename the module name from `:sdk` to `openCV`.
-5. Click **Finish** and allow Gradle to sync.
-
-### 5️⃣ Configure OpenCV in Gradle
-
-#### **Modify `settings.gradle` to include OpenCV:**
-
-```gradle
-include ':openCV'
-project(':openCV').projectDir = new File('openCV')
-```
-
-#### **Modify `app/build.gradle` to include OpenCV:**
-
-```gradle
-dependencies {
-    implementation project(':openCV')
-}
+git clone https://github.com/nathabee/extraction-app.git
+cd extraction-app
+cd VisuBee
 ```
 
 ---
 
-## 6️⃣ Run the App
-
-1. **Build the project**
-``` 
-cd ExtractionApp
+## **🚀 Running the App**
+### **1️⃣ Build the Project**
+```bash
 ./gradlew clean
-./gradlew assembleDebug --warning-mode all
-
+./gradlew build
+./gradlew assembleDebug
+./gradlew installDebug
 ```
 
-
-2. **Connect an Android device** OR **Start an emulator**.
-3. Click **Run (▶)** in Android Studio.
-4. Open **Logcat** and check for OpenCV initialization messages.
+### **2️⃣ Run on Device or Emulator**
+1. **Connect an Android device** OR **start an emulator**.
+2. Open **Android Studio** and click **Run (▶)**.
+3. Check **Logcat** for OpenCV initialization messages.
 
 ---
 
-## 📸 Usage Guide
+## **📸 Usage Guide**
 
 ### **1️⃣ Select an Image**
-- Click **"Select Image"** to choose a file from the gallery.
-- The image will be displayed in the preview area.
+- Click **"Select Image"** to pick an image from the gallery.
+- The selected image will appear in the preview.
 
 ### **2️⃣ (Optional) Select a Background**
-- Click **"Select Background (Optional)"** to choose a reference background image.
+- Click **"Select Background"** (optional) for background processing.
 
-### **3️⃣ Adjust Image Processing Settings**
-- **Size:** Choose from Small (S), Medium (M), Large (L), etc.
-- **Tolerance:** Adjust the color tolerance for background removal.
-- **Brightness:** Modify brightness level.
-- **Edge Detection:** Set Threshold1 and Threshold2.
+### **3️⃣ Adjust Processing Settings**
+- **Size:** Choose between **Small (S), Medium (M), Large (L), etc.**  
+- **Tolerance:** Adjust background color tolerance.  
+- **Brightness:** Modify brightness level.  
+- **Edge Detection:** Set **Threshold1** and **Threshold2**.
 
 ### **4️⃣ Process Image**
 - Click **"Process Image"** to apply OpenCV transformations.
-- The processed images will be displayed : image with transparent background , image with edge .
+- The results will display:  
+  - **Image with a transparent background**
+  - **Image with detected edges**
+
+### **5️⃣ Save Processed Image**
+- Click **"Save Image"** to store the output in the gallery.
 
 ---
 
-## ⚙️ Technologies Used
-
-- **Android Studio** - Main development environment.
-- **Java** - Core programming language.
-- **OpenCV** - Image processing library.
-- **Gradle** - Build automation tool.
-
----
-
-## 🛠 Troubleshooting
-
-### **1️⃣ OpenCV Not Found**
-Ensure OpenCV is properly linked by verifying `app/build.gradle` contains:
-
-```gradle
-dependencies {
-    implementation project(':openCV')
-}
-```
-
-### **2️⃣ Gradle Build Issues**
-- Try cleaning the project: `Build` → `Clean Project`
-- Ensure **NDK** is installed correctly.
-- Check Gradle version compatibility.
-
-### **3️⃣ App Crashes on Start**
-- Check Logcat for errors.
-- Verify permissions for Camera & Storage in `AndroidManifest.xml`:
-
-```xml
-<uses-permission android:name="android.permission.CAMERA"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-```
+## **⚙️ Technologies Used**
+- **Android Studio** – Development environment.  
+- **Kotlin** – Core programming language.  
+- **OpenCV** – Image processing library.  
+- **Jetpack MVVM** – Architecture for better scalability.  
+- **Gradle** – Build automation tool.  
 
 ---
 
-## 📌 Future Improvements
-
-🔹 Real-time Camera Processing
-🔹 Customizable Filters
-🔹 Enhanced UI/UX
-
----
-
-## 📝 License
-
+## **📝 License**
 This project is open-source under the **MIT License**.
 
 ---
 
-## 👥 Contributors
+## **👥 Contributors**
+👤 **Nathabee** – Lead Developer  
+🤖 **ChatGPT** – Assisted in architecture, logic, and documentation  
 
-Nathabee & ChatGPT - Developer
+🔹 _Open to contributions! Fork the repository and submit a Pull Request (PR)._ 🚀  
 
-_Open to new contributors! Fork and submit PRs. 🚀_
-
+---
+ 
