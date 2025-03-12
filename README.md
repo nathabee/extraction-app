@@ -1,6 +1,3 @@
-Here's your updated README intro line to clarify that **VisuBee is built with Kotlin and does not use Jetpack Compose**:
-
----
 
 # **VisuBee - Android Image Processing with OpenCV**
 
@@ -24,6 +21,22 @@ Unlike modern Jetpack Compose apps, **VisuBee follows a traditional XML-based UI
 📑 **Specification:** [Specification](documentation/specification.md)  
 📌 **Introduction to MVVM Architecture:** [Jetpack Architecture](documentation/Jetpack-Architecture.md)  
  
+## 📸 Screenshots
+
+Here is a preview of the app:
+ 
+### 📷 Image Processing
+- First choose file and background
+![Processing Screen](documentation/screenshots/visubee-processing-1.png)
+-processed image
+![Processing Screen](documentation/screenshots/visubee-processing-2.png)
+
+
+### 🏠 Home Screen
+![Home Screen](documentation/screenshots/visubee-home.png)
+
+### ⚙️ Settings Screen
+![Settings Screen](documentation/screenshots/visubee-settings.png)
 
 ---
 
