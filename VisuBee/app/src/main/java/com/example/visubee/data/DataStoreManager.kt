@@ -22,7 +22,7 @@ class DataStoreManager(context: Context) {
     }
 
     val galleryPath: Flow<String> = dataStore.data.map { preferences ->
-        preferences[GALLERY_PATH_KEY] ?: "Pictures/KotlinTestApp"
+        preferences[GALLERY_PATH_KEY] ?: "Pictures/VisuBee"
     }
 
     suspend fun saveSettings(imageSize: String, galleryPath: String) {

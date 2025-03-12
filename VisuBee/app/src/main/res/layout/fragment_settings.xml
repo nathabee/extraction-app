@@ -8,19 +8,27 @@
     <Spinner
         android:id="@+id/spinner_image_size"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="48dp"/>
 
     <EditText
         android:id="@+id/edit_gallery_path"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Gallery Path"/>
+        android:layout_height="48dp"
+        android:hint="@string/gallery_path"
+        android:focusable="true"
+        android:clickable="true"/>
+
+    <Button
+        android:id="@+id/button_choose_path"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/choose_save_location"/>
 
     <Button
         android:id="@+id/button_save"
         style="@style/CustomButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Settings"/>
+        android:layout_height="48dp"
+        android:text="@string/save_settings"/>
 
 </LinearLayout>

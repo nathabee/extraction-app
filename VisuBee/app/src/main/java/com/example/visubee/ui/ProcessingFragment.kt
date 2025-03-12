@@ -1,10 +1,11 @@
 package com.example.visubee.ui
 
-import android.content.Intent
+//import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,25 +13,39 @@ import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+//import androidx.lifecycle.Observer
 import com.example.visubee.R
 import com.example.visubee.data.ImageSize
 import com.example.visubee.data.ProcessingRepository
 import com.example.visubee.viewmodel.ProcessingViewModel
 import com.example.visubee.viewmodel.ProcessingViewModelFactory
 import java.io.IOException
-import android.util.Log
+//import android.util.Log
 import androidx.appcompat.app.AlertDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+//import androidx.compose.ui.text.intl.Locale
+import com.example.visubee.viewmodel.SettingsViewModel
+//import kotlinx.coroutines.CoroutineScope
+//import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.opencv.android.OpenCVLoader
+//import org.opencv.android.OpenCVLoader
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.collect
+import java.io.File
+import java.io.FileOutputStream
+import java.util.Locale
+import androidx.documentfile.provider.DocumentFile
+
+
+
 
 class ProcessingFragment : Fragment() {
 
     private val viewModel: ProcessingViewModel by viewModels {
-        ProcessingViewModelFactory(requireContext(), ProcessingRepository())
+        ProcessingViewModelFactory(requireActivity().application, ProcessingRepository()) // ✅ FIXED
     }
+
+    private val settingsViewModel: SettingsViewModel by activityViewModels()
 
     private lateinit var progressBar: ProgressBar
     private lateinit var imageViewInput: ImageView
@@ -43,6 +58,11 @@ class ProcessingFragment : Fragment() {
 
     private var inputImageUri: Uri? = null
     private var backgroundImageUri: Uri? = null
+
+    private lateinit var filenameEditText: EditText
+    private var currentGalleryPath: String = ""
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +89,13 @@ class ProcessingFragment : Fragment() {
         threshold2SeekBar = view.findViewById(R.id.seekbar_threshold2)
         toleranceSeekBar = view.findViewById(R.id.seekbar_tolerance)
         brightnessSeekBar = view.findViewById(R.id.seekbar_brightness)
+
+        lifecycleScope.launch {
+            settingsViewModel.galleryPath.observe(viewLifecycleOwner) { path ->
+                // now you always have the latest path available:
+                currentGalleryPath = path
+            }
+        }
 
         // ✅ Populate Image Size Spinner
         val imageSizes = ImageSize.values().map { it.name }
@@ -181,7 +208,7 @@ class ProcessingFragment : Fragment() {
 
         brightnessSeekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                textBrightness.text = progress.toString()
+                textBrightness.text = String.format("%d", progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -199,6 +226,30 @@ class ProcessingFragment : Fragment() {
                     .show()
             }
         }
+
+        filenameEditText = view.findViewById(R.id.filenameEditText)
+
+        val originalName = inputImageUri?.lastPathSegment ?: "default_filename"
+        val selectedSize = imageSizeSpinner.selectedItem.toString()
+
+        // Prefill filename:
+        filenameEditText.setText(String.format("%s_%s_edge.png", originalName, selectedSize))
+
+        btnSave.setOnClickListener {
+            saveProcessedImages()
+        }
+
+
+
+
+    }
+
+
+    // ✅ Ensure filename updates when selecting a new image
+    private fun updateFilenameEditText() {
+        val originalName = inputImageUri?.lastPathSegment?.substringBeforeLast(".") ?: "default_filename"
+        val selectedSize = imageSizeSpinner.selectedItem.toString()
+        filenameEditText.setText(String.format(Locale.getDefault(), "%s_%s", originalName, selectedSize))
     }
 
     // ✅ Image Picker
@@ -208,8 +259,10 @@ class ProcessingFragment : Fragment() {
                 inputImageUri = it
                 imageViewInput.setImageURI(it)
                 loadBitmap(it, isBackground = false)
+                updateFilenameEditText() // 🔹 Update filename when new image is selected
             }
         }
+
 
     // ✅ Background Picker
     private val backgroundPickerLauncher =
@@ -274,4 +327,67 @@ class ProcessingFragment : Fragment() {
             Toast.makeText(requireContext(), "Error loading image", Toast.LENGTH_SHORT).show()
         }
     }
+
+
+    private fun saveImage(bitmap: android.graphics.Bitmap, filename: String): Boolean {
+        val galleryPath = settingsViewModel.galleryPath.value
+
+        if (galleryPath.isNullOrEmpty()) {
+            Toast.makeText(context, "No save location selected!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return try {
+            val uri = Uri.parse(galleryPath) // Convert stored path to URI
+            val pickedDir = DocumentFile.fromTreeUri(requireContext(), uri)
+
+            if (pickedDir != null && pickedDir.canWrite()) {
+                val file = pickedDir.createFile("image/png", filename)
+                file?.let {
+                    requireContext().contentResolver.openOutputStream(it.uri)?.use { outputStream ->
+                        bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG, 100, outputStream)
+                    }
+                    Toast.makeText(context, "Image saved: $filename", Toast.LENGTH_LONG).show()
+                    return true
+                }
+            }
+
+            Toast.makeText(context, "Failed to save image", Toast.LENGTH_SHORT).show()
+            false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Error saving image", Toast.LENGTH_SHORT).show()
+            false
+        }
+    }
+
+    private fun saveProcessedImages() {
+        val baseFilename = filenameEditText.text.toString().trim()
+        val selectedSize = imageSizeSpinner.selectedItem.toString()
+
+        val edgeFilename = "${baseFileNameFrom(baseFilename)}_${selectedSize}_edge.png"
+        val transparentFilename = "${baseFileNameFrom(baseFilename)}_${selectedSize}_transparent.png"
+
+        val edgeBitmap = viewModel.edgeBitmap.value
+        val transparentBitmap = viewModel.transparentBitmap.value
+
+        if (edgeBitmap == null || transparentBitmap == null) {
+            Toast.makeText(context, "Processed images not available", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val edgeSaved = saveImage(edgeBitmap, edgeFilename)
+        val transparentSaved = saveImage(transparentBitmap, transparentFilename)
+
+        if (edgeSaved && transparentSaved) {
+            Toast.makeText(context, "Images saved successfully!", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(context, "Failed to save images.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun baseFileNameFrom(path: String): String {
+        return File(path).nameWithoutExtension
+    }
+
 }

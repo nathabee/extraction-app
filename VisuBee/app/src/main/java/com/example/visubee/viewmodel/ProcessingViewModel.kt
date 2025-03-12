@@ -1,8 +1,10 @@
 package com.example.visubee.viewmodel
 
-import android.content.Context
+import android.app.Application
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Environment
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.visubee.data.DataStoreManager
 import com.example.visubee.data.ImageSize
@@ -11,13 +13,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import androidx.lifecycle.viewModelScope
+import java.io.File
+import android.media.MediaScannerConnection
+import java.io.FileOutputStream
+
 
 class ProcessingViewModel(
-    private val context: Context,
+    application: Application,
     private val repository: ProcessingRepository
-) : ViewModel() {
+) : AndroidViewModel(application) {
 
-    private val dataStoreManager = DataStoreManager(context)
+    private val dataStoreManager = DataStoreManager(getApplication())
+
 
     // ✅ Image Processing States
     private val _inputImageUri = MutableLiveData<Uri?>()
@@ -128,11 +135,50 @@ class ProcessingViewModel(
 
 
     // ✅ Save Processed Image to Gallery
-    fun saveImage(bitmap: Bitmap, fileName: String) {
+    fun saveImage(bitmap: Bitmap, filename: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.saveBitmapToGallery(context, bitmap, fileName, _selectedSize.value ?: ImageSize.M)
+            val appGalleryPath = getApplication<Application>().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+            if (appGalleryPath == null) {
+                // 🔹 Show error on the UI thread
+                viewModelScope.launch(Dispatchers.Main) {
+                    Toast.makeText(getApplication(), "Error: Could not access gallery folder.", Toast.LENGTH_SHORT).show()
+                }
+                return@launch
+            }
+
+            val file = File(appGalleryPath, filename)
+
+            try {
+                FileOutputStream(file).use { out ->
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+                }
+
+                // 🔹 Call MediaScannerConnection after saving the file
+                MediaScannerConnection.scanFile(
+                    getApplication(),
+                    arrayOf(file.absolutePath),
+                    arrayOf("image/png")
+                ) { path, uri ->
+                    println("✅ Image registered in gallery: $path")
+                }
+
+                // 🔹 Show success message on the UI thread
+                viewModelScope.launch(Dispatchers.Main) {
+                    Toast.makeText(getApplication(), "Image saved: ${file.absolutePath}", Toast.LENGTH_LONG).show()
+                }
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+
+                // 🔹 Show failure message on the UI thread
+                viewModelScope.launch(Dispatchers.Main) {
+                    Toast.makeText(getApplication(), "Failed to save image", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
+
 
     private val _backgroundImageUri = MutableLiveData<Uri?>()
     val backgroundImageUri: LiveData<Uri?> get() = _backgroundImageUri

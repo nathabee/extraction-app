@@ -1,19 +1,22 @@
 package com.example.visubee.viewmodel
 
-import android.content.Context
+import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.visubee.data.ProcessingRepository
 
 class ProcessingViewModelFactory(
-    private val context: Context,
+    private val application: Application, // 🔹 Use Application instead of Context
     private val repository: ProcessingRepository
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ProcessingViewModel::class.java)) {
-            return ProcessingViewModel(context, repository) as T
+            return ProcessingViewModel(application, repository) as T // 🔹 Pass Application
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
+
+

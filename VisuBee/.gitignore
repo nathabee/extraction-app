@@ -13,3 +13,17 @@
 .externalNativeBuild
 .cxx
 local.properties
+# Ignore IDE and build-related files
+.idea/
+.gradle/
+build/
+*.iml
+
+# Ignore Kotlin error logs
+VisuBee/.kotlin/errors/
+
+# Ignore temporary files and old backups
+*.old
+*.bak
+*.swp
+
