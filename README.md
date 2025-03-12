@@ -26,17 +26,17 @@ Unlike modern Jetpack Compose apps, **VisuBee follows a traditional XML-based UI
 Here is a preview of the app:
  
 ### 📷 Image Processing
-- First choose file and background
-![Processing Screen](documentation/screenshots/visubee-processing-1.png)
--processed image
-![Processing Screen](documentation/screenshots/visubee-processing-2.png)
+- First choose file and background  
+  <img src="documentation/screenshots/visubee-processing-1.png" width="400">
 
+- Processed image  
+  <img src="documentation/screenshots/visubee-processing-2.png" width="400">
 
-### 🏠 Home Screen
-![Home Screen](documentation/screenshots/visubee-home.png)
+### 🏠 Home Screen  
+<img src="documentation/screenshots/visubee-home.png" width="400">
 
-### ⚙️ Settings Screen
-![Settings Screen](documentation/screenshots/visubee-settings.png)
+### ⚙️ Settings Screen  
+<img src="documentation/screenshots/visubee-settings.png" width="400">
 
 ---
 
