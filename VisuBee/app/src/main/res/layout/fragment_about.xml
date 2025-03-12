@@ -9,7 +9,7 @@
         android:id="@+id/textAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="KotlinTestApp"
+        android:text="VisuBee"
         android:textSize="24sp"
         android:textStyle="bold"
         android:paddingBottom="8dp"/>
@@ -38,4 +38,12 @@
         android:layout_height="wrap_content"
         android:text="License: MIT"
         android:paddingTop="16dp"/>
+
+
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/beebot_da_vinci" />
 </LinearLayout>

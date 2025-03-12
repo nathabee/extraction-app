@@ -28,6 +28,10 @@ class MainActivity : AppCompatActivity() {
         // ✅ Set Toolbar as ActionBar (Required for Hamburger Menu)
         setSupportActionBar(toolbar)
 
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setLogo(R.drawable.beebot_da_vinci)
+        supportActionBar?.setDisplayUseLogoEnabled(true)
+
         // ✅ Find NavController (Handles Navigation)
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as? NavHostFragment

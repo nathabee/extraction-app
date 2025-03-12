@@ -11,13 +11,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- ✅ Toolbar (Required for Hamburger Menu) --> 
+        <!-- ✅ Toolbar (Required for Hamburger Menu) -->
         <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple_500"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/purple_500"
+            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+            app:logo="@drawable/beebot_da_vinci"/>
+
 
 
         <!-- ✅ Navigation Host Fragment (Handles Screen Navigation) -->
