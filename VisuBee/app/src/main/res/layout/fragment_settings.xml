@@ -13,7 +13,7 @@
     <EditText
         android:id="@+id/edit_gallery_path"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="100dp"
         android:hint="@string/gallery_path"
         android:focusable="true"
         android:clickable="true"/>
@@ -26,7 +26,6 @@
 
     <Button
         android:id="@+id/button_save"
-        style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/save_settings"/>

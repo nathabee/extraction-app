@@ -1,13 +1,35 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Light Theme -->
+    <!-- Light Theme --> 
     <style name="Theme.VisuBee" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Colors -->
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorSecondary">@color/teal_200</item>
         <item name="android:windowBackground">@color/myBackgroundColor</item>
+        <item name="colorSurface">@color/teal_700</item>
+        <item name="colorOnSurface">@color/black</item>
+
+        <!-- Status Bar & Nav Bar -->
+        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:navigationBarColor">@color/black</item>
+
+        <!-- Text & Fonts -->
+        <item name="android:fontFamily">@font/gentiumplus_regular</item>
+        <item name="android:textColorPrimary">@color/black</item>
+
+        <!-- Button & Widget Styles -->
+        <item name="android:buttonStyle">@style/Widget.Material3.Button</item>
+
+        <!-- Dimensions & Effects -->
+        <!-- item name="android:padding">16dp</item>
+        <item name="android:elevation">4dp</item -->
+
+
+
     </style>
+
 
     <!-- Dark Theme -->
     <style name="Theme.VisuBee.Dark" parent="Theme.Material3.Dark.NoActionBar">

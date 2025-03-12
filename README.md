@@ -26,17 +26,16 @@ Unlike modern Jetpack Compose apps, **VisuBee follows a traditional XML-based UI
 Here is a preview of the app:
  
 ### 📷 Image Processing
-- First choose file and background  
-  <img src="documentation/screenshots/visubee-processing-1.png" width="200">
 
-- Processed image  
-  <img src="documentation/screenshots/visubee-processing-2.png" width="200">
+| **Step 1: Choose File & Background** | **Step 2: Processed Image** |
+|-------------------------------------|---------------------------|
+| <img src="documentation/screenshots/visubee-processing-1.png" width="200"> | <img src="documentation/screenshots/visubee-processing-2.png" width="200"> |
 
-### 🏠 Home Screen  
-<img src="documentation/screenshots/visubee-home.png" width="200">
 
-### ⚙️ Settings Screen  
-<img src="documentation/screenshots/visubee-settings.png" width="200">
+### Other screen
+|  **🏠 Home Screen**  | **⚙️ Settings Screen** | 
+|-------------------------------------|---------------------------|
+| <img src="documentation/screenshots/visubee-home.png" width="200"> | <img src="documentation/screenshots/visubee-settings.png" width="200"> | 
 
 ---
 
@@ -123,6 +122,20 @@ cd VisuBee
 ## **📝 License**
 This project is open-source under the **MIT License**.
 
+### 📄 OpenCV License
+This app uses **OpenCV**, which is licensed under the **Apache License 2.0**.  
+Full license text:  
+📜 [VisuBee/LICENSES/OpenCV-APACHE-2.0.txt](LICENSES/OpenCV-APACHE-2.0.txt)
+
+### 📄 Gentium Plus Font License
+This app includes the **Gentium Plus font**, which is licensed under the **SIL Open Font License (OFL)**.  
+Full license text:  
+📜 [VisuBee/LICENSES/Gentium-OFL-1.1.txt](LICENSES/Gentium-OFL-1.1.txt)
+
+### 📄 Glide License
+This app uses **Glide** for image loading, which is licensed under the **BSD 2-Clause License**.  
+Full license text:  
+📜 [VisuBee/LICENSES/Glide-BSD-2-Clause.txt](LICENSES/Glide-BSD-2-Clause.txt)
 ---
 
 ## **👥 Contributors**

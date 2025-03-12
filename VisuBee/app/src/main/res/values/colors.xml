@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="myPrimaryColor">#6200EE</color> <!-- Purple -->
-    <color name="myPrimaryVariant">#3700B3</color> <!-- Darker Purple -->
-    <color name="myBackgroundColor">#F5F5F5</color> <!-- Light Gray -->
-    <color name="myDarkPrimaryColor">#BB86FC</color> <!-- Light Purple -->
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="myPrimaryColor">#9C27B0</color> <!-- Purple -->
+    <color name="myPrimaryVariant">#8300B3</color> <!-- Darker Purple -->
+    <color name="myBackgroundColor">#CEDCDC</color> <!-- Light Gray -->
+    <color name="myDarkPrimaryColor">#E086FC</color> <!-- Light Purple -->
+    <color name="purple_200">#DD86FC</color>
+    <color name="purple_500">#A300EE</color>
+    <color name="purple_700">#7400B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
 </resources>
