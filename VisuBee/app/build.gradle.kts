@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
 }
 
 android {
@@ -68,4 +69,8 @@ dependencies {
     // Kotlin Coroutines (for DataStore)
     implementation(libs.coroutines.android)
     implementation(libs.opencv)
+    //glide
+    implementation(libs.glide)
+    kapt(libs.glideCompiler)
+
 }

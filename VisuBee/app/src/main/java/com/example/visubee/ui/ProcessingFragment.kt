@@ -35,8 +35,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.Locale
 import androidx.documentfile.provider.DocumentFile
-
-
+import com.bumptech.glide.Glide
 
 
 class ProcessingFragment : Fragment() {
@@ -161,9 +160,17 @@ class ProcessingFragment : Fragment() {
             view.findViewById<ImageView>(R.id.img_edge).setImageBitmap(bitmap)
         }
 
-        viewModel.transparentBitmap.observe(viewLifecycleOwner) { bitmap ->
+        /*viewModel.transparentBitmap.observe(viewLifecycleOwner) { bitmap ->
             view.findViewById<ImageView>(R.id.img_transparent).setImageBitmap(bitmap)
+        }*/
+        viewModel.transparentBitmap.observe(viewLifecycleOwner) { bitmap ->
+            val imageView = view.findViewById<ImageView>(R.id.img_transparent)
+
+            Glide.with(requireContext()) // Use Glide instead of setImageBitmap
+                .load(bitmap) // Load the processed transparent image
+                .into(imageView) // Set it to your ImageView
         }
+
 
         // ✅ Save Image Button
         btnSave.setOnClickListener {
@@ -233,7 +240,7 @@ class ProcessingFragment : Fragment() {
         val selectedSize = imageSizeSpinner.selectedItem.toString()
 
         // Prefill filename:
-        filenameEditText.setText(String.format("%s_%s_edge.png", originalName, selectedSize))
+        filenameEditText.setText(String.format("%s", originalName))
 
         btnSave.setOnClickListener {
             saveProcessedImages()
@@ -329,7 +336,7 @@ class ProcessingFragment : Fragment() {
     }
 
 
-    private fun saveImage(bitmap: android.graphics.Bitmap, filename: String): Boolean {
+    /*private fun saveImage(bitmap: android.graphics.Bitmap, filename: String): Boolean {
         val galleryPath = settingsViewModel.galleryPath.value
 
         if (galleryPath.isNullOrEmpty()) {
@@ -359,14 +366,59 @@ class ProcessingFragment : Fragment() {
             Toast.makeText(context, "Error saving image", Toast.LENGTH_SHORT).show()
             false
         }
+    }*/
+    private fun saveImage(bitmap: android.graphics.Bitmap, filename: String, selectedSize: ImageSize): Boolean {
+        val galleryPath = settingsViewModel.galleryPath.value
+
+        if (galleryPath.isNullOrEmpty()) {
+            Toast.makeText(context, "No save location selected!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return try {
+            val uri = Uri.parse(galleryPath) // Convert stored path to URI
+            val pickedDir = DocumentFile.fromTreeUri(requireContext(), uri)
+
+            if (pickedDir != null && pickedDir.canWrite()) {
+                val file = pickedDir.createFile("image/webp", filename) // ✅ WebP for better compression
+                file?.let {
+                    requireContext().contentResolver.openOutputStream(it.uri)?.use { outputStream ->
+                        val quality = when (selectedSize) {
+                            ImageSize.XS, ImageSize.S -> 75  // ✅ Lower quality for smaller sizes
+                            ImageSize.M -> 85              // ✅ Medium quality
+                            ImageSize.L, ImageSize.XL -> 100 // ✅ Keep high quality
+                        }
+                        bitmap.compress(Bitmap.CompressFormat.WEBP, quality, outputStream) // ✅ Adaptive Compression
+                    }
+                    Toast.makeText(context, "Image saved: $filename", Toast.LENGTH_LONG).show()
+                    return true
+                }
+            }
+
+            Toast.makeText(context, "Failed to save image", Toast.LENGTH_SHORT).show()
+            false
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Error saving image", Toast.LENGTH_SHORT).show()
+            false
+        }
     }
+
 
     private fun saveProcessedImages() {
         val baseFilename = filenameEditText.text.toString().trim()
-        val selectedSize = imageSizeSpinner.selectedItem.toString()
+        val selectedSizeString = imageSizeSpinner.selectedItem.toString()
 
-        val edgeFilename = "${baseFileNameFrom(baseFilename)}_${selectedSize}_edge.png"
-        val transparentFilename = "${baseFileNameFrom(baseFilename)}_${selectedSize}_transparent.png"
+        // ✅ Convert string to ImageSize enum
+        val selectedSize = try {
+            ImageSize.valueOf(selectedSizeString)
+        } catch (e: IllegalArgumentException) {
+            Toast.makeText(context, "Invalid image size selected!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val edgeFilename = "${baseFileNameFrom(baseFilename)}_${selectedSize.name}_edge.png"
+        val transparentFilename = "${baseFileNameFrom(baseFilename)}_${selectedSize.name}_transparent.png"
 
         val edgeBitmap = viewModel.edgeBitmap.value
         val transparentBitmap = viewModel.transparentBitmap.value
@@ -376,8 +428,8 @@ class ProcessingFragment : Fragment() {
             return
         }
 
-        val edgeSaved = saveImage(edgeBitmap, edgeFilename)
-        val transparentSaved = saveImage(transparentBitmap, transparentFilename)
+        val edgeSaved = saveImage(edgeBitmap, edgeFilename, selectedSize)
+        val transparentSaved = saveImage(transparentBitmap, transparentFilename, selectedSize)
 
         if (edgeSaved && transparentSaved) {
             Toast.makeText(context, "Images saved successfully!", Toast.LENGTH_LONG).show()
@@ -385,6 +437,7 @@ class ProcessingFragment : Fragment() {
             Toast.makeText(context, "Failed to save images.", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private fun baseFileNameFrom(path: String): String {
         return File(path).nameWithoutExtension

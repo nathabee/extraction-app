@@ -26,8 +26,10 @@ class ProcessingRepository {
     ): Pair<Bitmap?, Bitmap?> = withContext(Dispatchers.IO) {
         if (inputBitmap == null) return@withContext Pair(null, null)
 
-        val resizedBitmap = resizeBitmap(inputBitmap, selectedSize)
+        // ✅ Step 1: Resize BEFORE processing for efficiency (maxFactor = 10)
+        val resizedBitmap = adaptiveResizeBitmap(inputBitmap, selectedSize, maxFactor = 10)
 
+        // ✅ Step 2: Edge Detection
         val imgMat = Mat(resizedBitmap.height, resizedBitmap.width, CvType.CV_8UC4)
         bitmapToMat(resizedBitmap, imgMat)
 
@@ -38,20 +40,42 @@ class ProcessingRepository {
         Imgproc.cvtColor(imgMat, imgMat, Imgproc.COLOR_GRAY2RGBA)
         matToBitmap(imgMat, edgeBitmap)
 
-        //val transparentBitmap = resizeBitmap(removeBackground(inputBitmap, tolerance, brightness), selectedSize)
+        // ✅ Step 3: Background Removal on the resized image
         val transparentBitmap = if (backgroundBitmap != null) {
-            removeBackground(inputBitmap, backgroundBitmap, tolerance)
+            removeBackground(resizedBitmap, backgroundBitmap, tolerance)
         } else {
-            removeBackground(inputBitmap, null, tolerance)
+            removeBackground(resizedBitmap, null, tolerance)
         }
 
+        // ✅ Step 4: Resize AGAIN to ensure exact output size
+        val finalTransparentBitmap = resizeBitmap(transparentBitmap, selectedSize)
 
-
-        return@withContext Pair(edgeBitmap, transparentBitmap)
+        return@withContext Pair(edgeBitmap, finalTransparentBitmap)
     }
 
 
-    fun saveBitmapToGallery(context: Context, bitmap: Bitmap, fileName: String, selectedSize: ImageSize) {
+    private fun adaptiveResizeBitmap(bitmap: Bitmap, targetSize: ImageSize, maxFactor: Int = 10): Bitmap {
+        val targetWidth = targetSize.width
+        val targetHeight = targetSize.height
+
+        // Calculate scale factor
+        val scaleFactor = maxFactor.coerceAtMost(
+            (bitmap.width / targetWidth).coerceAtMost(bitmap.height / targetHeight)
+        )
+
+        // Resize only if the image is `N` times larger
+        return if (scaleFactor > 1) {
+            val newWidth = bitmap.width / scaleFactor
+            val newHeight = bitmap.height / scaleFactor
+            Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+        } else {
+            bitmap // Keep original size if already within threshold
+        }
+    }
+
+
+
+    /*fun saveBitmapToGallery(context: Context, bitmap: Bitmap, fileName: String, selectedSize: ImageSize) {
         val contentValues = ContentValues().apply {
             put(MediaStore.Images.Media.DISPLAY_NAME, "$fileName-${selectedSize.name}.png")
             put(MediaStore.Images.Media.MIME_TYPE, "image/png")
@@ -66,7 +90,7 @@ class ProcessingRepository {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             }
         }
-    }
+    }*/
 
 
 }

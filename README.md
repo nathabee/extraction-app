@@ -27,16 +27,16 @@ Here is a preview of the app:
  
 ### 📷 Image Processing
 - First choose file and background  
-  <img src="documentation/screenshots/visubee-processing-1.png" width="400">
+  <img src="documentation/screenshots/visubee-processing-1.png" width="200">
 
 - Processed image  
-  <img src="documentation/screenshots/visubee-processing-2.png" width="400">
+  <img src="documentation/screenshots/visubee-processing-2.png" width="200">
 
 ### 🏠 Home Screen  
-<img src="documentation/screenshots/visubee-home.png" width="400">
+<img src="documentation/screenshots/visubee-home.png" width="200">
 
 ### ⚙️ Settings Screen  
-<img src="documentation/screenshots/visubee-settings.png" width="400">
+<img src="documentation/screenshots/visubee-settings.png" width="200">
 
 ---
 
