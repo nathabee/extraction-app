@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Theme Options -->
+    <string-array name="theme_options">
+        <item>System</item>
+        <item>Hell Design</item>
+        <item>Dunkel Design</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>system</item>
+        <item>Hell</item>
+        <item>Dunkel</item>
+    </string-array>
+
+    <!-- Image Size Options -->
+    <string-array name="image_size_options">
+        <item>XS</item>
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+    </string-array>
+</resources>

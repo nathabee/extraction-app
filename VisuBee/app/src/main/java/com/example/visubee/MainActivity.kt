@@ -1,5 +1,6 @@
 package com.example.visubee
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,13 +14,28 @@ import com.google.android.material.navigation.NavigationView
 import org.opencv.android.OpenCVLoader
 import android.util.Log
 
+import androidx.appcompat.app.AppCompatDelegate
+
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // ✅ Load the saved theme preference
+        val sharedPref = getSharedPreferences("settings", Context.MODE_PRIVATE)
+        val themePreference = sharedPref.getString("theme_preference", "system")
+
+
+        when (themePreference) {
+            "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            "system" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        }
+
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         drawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -64,11 +80,7 @@ class MainActivity : AppCompatActivity() {
             navView.setupWithNavController(navController)
         }
 
-        if (OpenCVLoader.initDebug()) {
-            Log.d("OpenCV", "Initialization successful")
-        } else {
-            Log.e("OpenCV", "Initialization failed")
-        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

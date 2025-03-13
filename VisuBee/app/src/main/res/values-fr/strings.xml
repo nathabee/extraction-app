@@ -15,5 +15,12 @@
     <string name="sav_file_name">Nom fichier sauvegarde</string>
     <string name="gallery_path">Chemin de la Gallerie</string>
     <string name="choose_save_location">changer le repertoire de sauvegarde</string>
-    <string name="save_settings">Sauver la configuration</string>
+    <string name="save_settings">Sauver la configuration</string><string name="welcome_to_visubee">Bienvenue sur VisuBee !</string>
+    <string name="this_app">Cette application vous permet de traiter des images, de modifier les paramètres et de visualiser une galerie en utilisant Jetpack et OpenCV.</string>
+    <string name="processing_select">🔹 Traitement : Sélectionner et traiter des images.\n🔹 Paramètres : Personnaliser les préférences de l\'application.\n🔹 Galerie : Voir les images enregistrées.\n🔹 À propos : En savoir plus sur cette application.</string>
+    <string name="license_mit">Licence : MIT</string>
+    <string name="powered_by">Propulsé par OpenCV et Android Studio, Jetpack Navigation, Material Components et DataStore.</string>
+    <string name="developed_by">Développé par : Nathabee, inspiré par la collaboration avec ChatGPT.</string>
+    <string name="version">Version 1.0.0</string>
+    <string name="visubee">VisuBee</string>
 </resources>

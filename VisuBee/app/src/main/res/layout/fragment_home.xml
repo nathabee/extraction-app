@@ -8,7 +8,7 @@
         android:id="@+id/textHomeTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to VisuBee!"
+        android:text="@string/welcome_to_visubee"
         android:textSize="24sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -18,14 +18,14 @@
         android:id="@+id/textHomeDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="This app allows you to process images, change settings, and view a gallery using Jetpack and OpenCV."
+        android:text="@string/this_app"
         android:padding="16dp"/>
 
     <TextView
         android:id="@+id/textHomeInstructions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="🔹 Processing: Select and process images.\n🔹 Settings: Customize app preferences.\n🔹 Gallery: View saved images.\n🔹 About: Learn more about this app."
+        android:text="@string/processing_select"
         android:padding="16dp"/>
 
 

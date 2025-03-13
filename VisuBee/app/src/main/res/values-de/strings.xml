@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">VisuBee</string>
+    <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
+    <string name="navigation_drawer_close">Navigationsmenü schließen</string>
+    <string name="about_version">Version: %s</string>
+    <string name="save_processed_image">Verarbeitete Bild speichern</string>
+    <string name="process_image">Bild verarbeiten</string>
+    <string name="threshold_2">Schwellenwert 2</string>
+    <string name="threshold_1">Schwellenwert 1</string>
+    <string name="brightness">Helligkeit</string>
+    <string name="tolerance">Toleranz</string>
+    <string name="image_size">Bildgröße</string>
+    <string name="select_background">Hintergrund auswählen</string>
+    <string name="select_image">Bild auswählen</string>
+    <string name="sav_file_name">Name der gespeicherten Datei</string>
+    <string name="gallery_path">Galeriepfad</string>
+    <string name="choose_save_location">Speicherort ändern</string>
+    <string name="save_settings">Einstellungen speichern</string>
+    <string name="welcome_to_visubee">Willkommen bei VisuBee!</string>
+    <string name="this_app">    Diese App ermöglicht es Ihnen, Bilder zu verarbeiten, Einstellungen zu ändern und eine Galerie mit Jetpack und OpenCV zu betrachten.</string>
+    <string name="processing_select">🔹 Verarbeitung: Bilder auswählen und bearbeiten.\n🔹 Einstellungen: App-Präferenzen anpassen.\n🔹 Galerie: Gespeicherte Bilder ansehen.\n🔹 Über: Mehr über diese App erfahren.</string>
+    <string name="license_mit">Lizenz: MIT</string>
+    <string name="powered_by">Unterstützt durch OpenCV und Android Studio, Jetpack Navigation, Material Components und DataStore.</string>
+    <string name="developed_by">Entwickelt von: Nathabee, inspiriert durch die Zusammenarbeit mit ChatGPT.</string>
+    <string name="version">Version 1.0.0</string>
+    <string name="visubee">VisuBee</string>
+</resources>

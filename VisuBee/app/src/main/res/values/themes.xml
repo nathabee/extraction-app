@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Light Theme --> 
+    <!-- Light Theme -->
     <style name="Theme.VisuBee" parent="Theme.Material3.Light.NoActionBar">
         <!-- Colors -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -22,22 +22,6 @@
         <!-- Button & Widget Styles -->
         <item name="android:buttonStyle">@style/Widget.Material3.Button</item>
 
-        <!-- Dimensions & Effects -->
-        <!-- item name="android:padding">16dp</item>
-        <item name="android:elevation">4dp</item -->
-
-
-
-    </style>
-
-
-    <!-- Dark Theme -->
-    <style name="Theme.VisuBee.Dark" parent="Theme.Material3.Dark.NoActionBar">
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_500</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <item name="android:statusBarColor">@color/black</item>
-        <item name="android:windowBackground">@color/black</item>
     </style>
 
 </resources>

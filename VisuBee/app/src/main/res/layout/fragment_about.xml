@@ -9,7 +9,7 @@
         android:id="@+id/textAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="VisuBee"
+        android:text="@string/visubee"
         android:textSize="24sp"
         android:textStyle="bold"
         android:paddingBottom="8dp"/>
@@ -18,25 +18,25 @@
         android:id="@+id/textVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Version 1.0.0"/>
+        android:text="@string/version"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Developed by: Nathabee, inspired by ChatGPT collaboration."
+        android:text="@string/developed_by"
         android:paddingTop="16dp"/>
 
     <TextView
         android:id="@+id/textLibraries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by OpenCV and Android Studio, Jetpack Navigation, Material Components, and DataStore"/>
+        android:text="@string/powered_by"/>
 
     <TextView
         android:id="@+id/textLicense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="License: MIT"
+        android:text="@string/license_mit"
         android:paddingTop="16dp"/>
 
 
