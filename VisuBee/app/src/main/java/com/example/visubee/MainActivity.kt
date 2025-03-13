@@ -62,7 +62,8 @@ class MainActivity : AppCompatActivity() {
                     R.id.processingFragment,
                     R.id.settingsFragment,
                     R.id.galleryFragment,
-                    R.id.aboutFragment
+                    R.id.aboutFragment,
+                    R.id.licensesFragment
                 ), drawerLayout
             )
 

@@ -18,7 +18,7 @@
         android:id="@+id/textVersion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/version"/>
+        android:text="Version X.X.X" />
 
     <TextView
         android:layout_width="wrap_content"

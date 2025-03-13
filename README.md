@@ -122,17 +122,17 @@ cd VisuBee
 ## **📝 License**
 This project is open-source under the **MIT License**.
 
-### 📄 OpenCV License
+### **📄 OpenCV License**
 This app uses **OpenCV**, which is licensed under the **Apache License 2.0**.  
 Full license text:  
 📜 [VisuBee/LICENSES/OpenCV-APACHE-2.0.txt](LICENSES/OpenCV-APACHE-2.0.txt)
 
-### 📄 Gentium Plus Font License
+### **📄 Gentium Plus Font License**
 This app includes the **Gentium Plus font**, which is licensed under the **SIL Open Font License (OFL)**.  
 Full license text:  
 📜 [VisuBee/LICENSES/Gentium-OFL-1.1.txt](LICENSES/Gentium-OFL-1.1.txt)
 
-### 📄 Glide License
+### **📄 Glide License**
 This app uses **Glide** for image loading, which is licensed under the **BSD 2-Clause License**.  
 Full license text:  
 📜 [VisuBee/LICENSES/Glide-BSD-2-Clause.txt](LICENSES/Glide-BSD-2-Clause.txt)

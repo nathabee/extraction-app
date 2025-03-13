@@ -19,10 +19,14 @@
     <string name="welcome_to_visubee">Willkommen bei VisuBee!</string>
     <string name="this_app">    Diese App ermöglicht es Ihnen, Bilder zu verarbeiten, Einstellungen zu ändern und eine Galerie mit Jetpack und OpenCV zu betrachten.</string>
     <string name="processing_select">🔹 Verarbeitung: Bilder auswählen und bearbeiten.\n🔹 Einstellungen: App-Präferenzen anpassen.\n🔹 Galerie: Gespeicherte Bilder ansehen.\n🔹 Über: Mehr über diese App erfahren.</string>
-    <string name="license_mit">Lizenz: MIT</string>
+    <string name="license_mit">Dieses Projekt ist Open-Source unter der MIT-Lizenz.</string>
+    <string name="license_opencv">Diese App verwendet OpenCV, lizenziert unter der Apache-Lizenz 2.0.</string>
+    <string name="license_gentium">Diese App enthält die Gentium Plus-Schriftart, lizenziert unter der SIL OFL.</string>
+    <string name="license_glide">Diese App verwendet Glide, lizenziert unter der BSD 2-Klausel-Lizenz.</string>
+    <string name="license_more_info">Vollständige Lizenztexte im App-Repository einsehen.</string>
     <string name="powered_by">Unterstützt durch OpenCV und Android Studio, Jetpack Navigation, Material Components und DataStore.</string>
     <string name="developed_by">Entwickelt von: Nathabee, inspiriert durch die Zusammenarbeit mit ChatGPT.</string>
-    <string name="version">Version 1.0.0</string>
     <string name="visubee">VisuBee</string>
+    <string name="version">Version XX</string>
     <string name="test_theme">Test theme</string>
 </resources>

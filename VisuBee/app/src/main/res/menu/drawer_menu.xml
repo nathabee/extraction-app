@@ -24,4 +24,11 @@
         android:id="@+id/aboutFragment"
         android:title="About"
         android:icon="@android:drawable/ic_menu_info_details"/>
+
+
+    <item
+        android:id="@+id/licensesFragment"
+        android:title="Licenses"
+        android:icon="@android:drawable/ic_menu_more"/>
+
 </menu>
