@@ -9,8 +9,8 @@
 
     <string-array name="theme_values">
         <item>system</item>
-        <item>jour</item>
-        <item>nuit</item>
+        <item>light</item>
+        <item>dark</item>
     </string-array>
 
     <!-- Image Size Options -->

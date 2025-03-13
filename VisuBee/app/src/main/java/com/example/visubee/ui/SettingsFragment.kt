@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -72,42 +73,6 @@ class SettingsFragment : Fragment() {
             viewModel.saveSettings(selectedSize, galleryPath)
         }
 
-
-        themeSpinner = view.findViewById(R.id.spinner_theme)
-
-        // ✅ Load themes from arrays.xml BEFORE using them
-        val themeOptions: Array<String> = resources.getStringArray(R.array.theme_options)
-        val themeValues: Array<String> = resources.getStringArray(R.array.theme_values)
-
-        // ✅ Set up the theme spinner adapter
-        val themeAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item, themeOptions)
-        themeSpinner.adapter = themeAdapter
-
-        // ✅ Load saved theme preference safely
-        val sharedPref = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val savedTheme = sharedPref.getString("theme_preference", "system") ?: "system"
-
-        // ✅ Set the spinner selection correctly
-        val selectedIndex = themeValues.indexOf(savedTheme)
-        themeSpinner.setSelection(if (selectedIndex != -1) selectedIndex else 2) // Default to "Follow System"
-
-        // ✅ Prevent unnecessary theme change on first load
-        var firstLoad = true
-        themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                if (firstLoad) {
-                    firstLoad = false
-                    return
-                }
-                val selectedTheme = themeValues[position]
-                saveThemePreference(selectedTheme)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
-
-
-
     }
 
 
@@ -128,16 +93,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-    // ✅ Function to Save and Apply Theme Preference
-    private fun saveThemePreference(theme: String) {
-        val sharedPref = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
-        sharedPref.edit().putString("theme_preference", theme).apply()
 
-        when (theme) {
-            "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            "system" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-        }
-    }
 
 }

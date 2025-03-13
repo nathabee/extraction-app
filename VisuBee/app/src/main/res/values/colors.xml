@@ -12,5 +12,8 @@
     <color name="gray_900">#535E5F</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="orange_200">#FA8117</color>
+    <color name="orange_500">#E65100</color>
+    <color name="orange_700">#BF360C</color>
 
 </resources>

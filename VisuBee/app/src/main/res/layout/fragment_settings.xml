@@ -25,19 +25,14 @@
         android:layout_height="48dp"
         android:text="@string/choose_save_location"/>
 
-    <Spinner
-        android:id="@+id/spinner_theme"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/theme_options"
-        android:layout_marginTop="16dp" />
-
 
     <Button
         android:id="@+id/button_save"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/save_settings"/>
+
+
 
 
 </LinearLayout>

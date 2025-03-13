@@ -21,16 +21,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // ✅ Load the saved theme preference
-        val sharedPref = getSharedPreferences("settings", Context.MODE_PRIVATE)
-        val themePreference = sharedPref.getString("theme_preference", "system")
 
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 
-        when (themePreference) {
-            "light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            "dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            "system" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        try {
+            System.loadLibrary("opencv_java4") // Ensure the correct library version
+            Log.d("OpenCV", "OpenCV library loaded successfully.")
+        } catch (e: UnsatisfiedLinkError) {
+            Log.e("OpenCV", "OpenCV library failed to load: ${e.message}")
         }
+
+
 
 
         super.onCreate(savedInstanceState)
